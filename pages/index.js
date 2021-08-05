@@ -1,81 +1,90 @@
-import Head from 'next/head'
+
+import { useState } from 'react';
+
 
 export default function Home() {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
 
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
+  const [shopData,setshopData] = useState([]);// here we define the hook
+  // as event listner
+  console.log(shopData)
+  function eventHandler(event){
+    // prevent defuld dont forget
+    event.preventDefault();
+    // console.log(event.target.minmun.value)
+    const storeData={
+      // get data from user input
+      
+      location:event.target.location.value,
+
+      min:event.target.minmun.value,
+      max:event.target.maximum.value,
+      avg:event.target.avgarag.value,
+    
+    }
+   
+    // console.log(storeData)
+    // to push the data
+    // setshopData.push(storeData)
+    setshopData(storeData)
+  }
+  return (
+    <div className="bg-green-40">
+      <head>
+        <title>cookie stand admin</title>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
+
+      <header className="bg-green-50">
+        <h1 className='text-2xl'>
+          Cookie Stand Admin
         </h1>
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
+      </header>
 
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
+      <main className="">
 
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
+        <form className="bg-green-100  flex-col w-3/4 p-5 mx-auto my-8 rounded-md"  onSubmit={eventHandler}>
+          <h1 className='text-center my-4 text-xl'>create cookie stand</h1>
+          <div className="flex" >
+            <label className="mx-1" >location</label>
+            <input name="location" className="flex-auto bg-gray"/>
+          </div>
 
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
+          <div className="mx-auto my-4">
+            <div className="flex-col">
+              <h2>minimum customers per hour</h2>
+              <input  name="minmun" className=""/>
+            </div>
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+            <div className="flex-col w-1/4">
+              <h2>maximum customers per hour</h2>
+              <input  name="maximum" className=""/>
+            </div>
+
+            <div className="">
+              <h2>average cookies per sale</h2>
+              <input  name="avgarag" className=""/>
+            </div>
+
+            <button type ="submit" className="">create</button>      
+          </div>   
+        </form>
+
+        
+        
+        {/* data shold display after create */}
+        <h3>
+            {JSON.stringify(shopData)}
+        </h3>
+
+        
+
       </main>
 
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
+      <footer className="flex text-2xl bg-green my-4 text-center text-gray">
+
+        &copy;2021
+
       </footer>
     </div>
   )
